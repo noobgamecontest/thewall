@@ -17,3 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'SentenceController@index')->name('sentences.index');
     Route::resource('sentences', 'SentenceController')->except(['index', 'show']);
 });
+
+Route::middleware('admin')->group(function () {
+    Route::resource('users', 'UserController')->except(['create', 'store', 'show', 'destroy']);
+});

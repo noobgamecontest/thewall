@@ -36,6 +36,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('sentences.index') }}">{{ __('Sentences') }}</a>
                     </li>
+                    @if(Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Utilisateurs') }}</a>
+                        </li>
+                    @endif
                 </ul>
 
                     <!-- Right Side Of Navbar -->
