@@ -36,6 +36,6 @@ class Motd extends Command
 
         $sentence->increment('views');
 
-        return $discordService->send($sentence->content);
+        return $discordService->send($sentence);
     }
 }

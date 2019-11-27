@@ -13,8 +13,8 @@
                         <div class="card mb-2">
                             <div class="card-body">
                                 <div class="card-text">
-                                    {{ $sentence->content }}<br/>
-                                    <span class="text-muted">Le {{ $sentence->exposed_at->format('d/m/Y') }} par {{ $sentence->author }}</span>
+                                    <p class="text-muted">Le {{ $sentence->exposed_at->format('d/m/Y') }} par {{ $sentence->author }}</p>
+                                    <p>{!! str_replace("\n", "<br/>", $sentence->content) !!}</p>
                                 </div>
                                 <a href="{{ route('sentences.edit', $sentence) }}" class="card-link">
                                     @lang('Modifier')

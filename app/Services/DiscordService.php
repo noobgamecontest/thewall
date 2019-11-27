@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Sentence;
 use GuzzleHttp\Client;
 use Illuminate\Config\Repository;
 
@@ -32,14 +33,23 @@ class DiscordService
     /**
      * Send a message to webhook
      *
-     * @param string $message
+     * @param \App\Models\Sentence $sentence
      * @return bool
      */
-    public function send(string $message) : bool
+    public function send(Sentence $sentence) : bool
     {
         $payload = [
-            'content' => $message,
             'tts' => false,
+            'embeds' => [
+                [
+                    'color' => 3183048,
+                    'title' => $sentence->author,
+                    'description' => $sentence->content,
+                    'footer' => [
+                        'text' => sprintf('Le %s', $sentence->exposed_at->format('d/m/Y')),
+                    ]
+                ]
+            ]
         ];
 
         $response = $this->httpClient->post($this->config->get('discord.webhook'), [
