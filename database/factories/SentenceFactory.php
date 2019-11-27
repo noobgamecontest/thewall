@@ -9,6 +9,7 @@ $factory->define(Sentence::class, function (Faker $faker) {
     return [
         'content' => $faker->sentence,
         'exposed_at' => $faker->dateTime,
+        'author' => $faker->name,
         'views' => $faker->randomNumber(2),
     ];
 });

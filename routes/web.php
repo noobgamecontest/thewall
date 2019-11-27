@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SentenceController@index')->name('sentences.index');
+
+Route::resource('sentences', 'SentenceController')->except(['index', 'show']);

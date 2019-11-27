@@ -17,8 +17,9 @@ class CreateSentencesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->text('content');
+            $table->text('author');
             $table->timestamp('exposed_at');
-            $table->integer('views');
+            $table->integer('views')->default(0);
         });
     }
 

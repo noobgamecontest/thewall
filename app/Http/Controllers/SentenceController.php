@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SentenceRequest;
 use App\Models\Sentence;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class SentenceController extends Controller
      */
     public function index()
     {
-        //
+        $sentences = Sentence::all();
+
+        return view('sentences.index', compact('sentences'));
     }
 
     /**
@@ -24,29 +27,22 @@ class SentenceController extends Controller
      */
     public function create()
     {
-        //
+        return view('sentences.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\SentenceRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SentenceRequest $request)
     {
-        //
-    }
+        $sentence = new Sentence($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sentence  $sentence
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sentence $sentence)
-    {
-        //
+        $sentence->save();
+
+        return redirect()->route('sentences.index');
     }
 
     /**
@@ -57,29 +53,34 @@ class SentenceController extends Controller
      */
     public function edit(Sentence $sentence)
     {
-        //
+        return view('sentences.edit', compact('sentence'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sentence  $sentence
+     * @param \App\Http\Requests\SentenceRequest $request
+     * @param \App\Models\Sentence $sentence
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sentence $sentence)
+    public function update(SentenceRequest $request, Sentence $sentence)
     {
-        //
+        $sentence->update($request->validated());
+
+        return redirect()->route('sentences.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sentence  $sentence
+     * @param \App\Models\Sentence $sentence
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Sentence $sentence)
     {
-        //
+        $sentence->delete();
+
+        return redirect()->route('sentences.index');
     }
 }
