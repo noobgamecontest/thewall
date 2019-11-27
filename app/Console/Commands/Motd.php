@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Sentence;
 use App\Services\DiscordService;
 use Illuminate\Console\Command;
 
@@ -22,16 +23,6 @@ class Motd extends Command
     protected $description = 'Balance une bouteille à la mer.';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @param \App\Services\DiscordService $discordService
@@ -39,8 +30,12 @@ class Motd extends Command
      */
     public function handle(DiscordService $discordService)
     {
-        $message = 'Player one, get ready !';
+        $sentence = Sentence::where('views', Sentence::min('views'))
+            ->get()
+            ->random();
 
-        return $discordService->send($message);
+        $sentence->increment('views');
+
+        return $discordService->send($sentence->content);
     }
 }
