@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', 'SentenceController@index')->name('sentences.index');
+Auth::routes();
 
-Route::resource('sentences', 'SentenceController')->except(['index', 'show']);
+Route::middleware('auth')->group(function () {
+    Route::get('/', 'SentenceController@index')->name('sentences.index');
+    Route::resource('sentences', 'SentenceController')->except(['index', 'show']);
+});

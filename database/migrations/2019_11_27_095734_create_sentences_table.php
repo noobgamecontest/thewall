@@ -18,7 +18,7 @@ class CreateSentencesTable extends Migration
             $table->timestamps();
             $table->text('content');
             $table->text('author');
-            $table->timestamp('exposed_at');
+            $table->timestamp('exposed_at')->nullable();
             $table->integer('views')->default(0);
         });
     }
