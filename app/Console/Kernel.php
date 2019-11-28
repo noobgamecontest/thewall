@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('motd')->twiceDaily(9, 14);
+         $schedule->command('motd')->twiceDaily(8, 13);
     }
 
     /**
