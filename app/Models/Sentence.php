@@ -19,5 +19,4 @@ class Sentence extends Model
     protected $dates = [
         'exposed_at',
     ];
-
 }
