@@ -35,6 +35,8 @@
                             </div>
                         </div>
                     @endforeach
+
+                    {!! $sentences->render() !!}
                 </div>
             </div>
         </div>
