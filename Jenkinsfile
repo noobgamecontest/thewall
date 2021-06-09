@@ -52,6 +52,7 @@ pipeline {
 
                 APP_KEY = credentials('ngc-wall.app-key')
                 APP_HOST = credentials('ngc-wall.app-host')
+                DISCORD_WEBHOOK = credentials('ngc-wall.discord-webhook')
             }
             steps {
                 sh '''
@@ -59,6 +60,7 @@ pipeline {
                     sed -ri "s/^APP_KEY=.*/APP_KEY=${APP_KEY}/g" .env
                     sed -ri "s/^APP_HOST=.*/APP_HOST=${APP_HOST}/g" .env
                     sed -ri "s/^APP_ENV=.*/APP_ENV=production/g" .env
+                    sed -ri "s/^DISCORD_WEBHOOK=.*/DISCORD_WEBHOOK=${DISCORD_WEBHOOK}/g" .env
 
                     apt-get update -y && apt-get install -y openssh-client rsync
                     eval $(ssh-agent -s)
