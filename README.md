@@ -21,3 +21,9 @@ docker-compose exec app composer up
 docker-compose exec app yarn install
 docker-compose exec app yarn run dev
 ```
+
+### Run cron from host
+
+```bash
+echo "* * * * * cd $PWD && /usr/local/bin/docker-compose exec -T app php artisan schedule:run >> /dev/null 2>&1" | crontab -
+```
