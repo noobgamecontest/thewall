@@ -6,20 +6,14 @@ networks:
 
 services:
   app:
-    build:
-      context: ./docker/app
-      args:
-        WWWUSER: '${WWWUSER}'
-        WWWGROUP: '${WWWGROUP}'
-    user: '${WWWUSER}:${WWWGROUP}'
+    image: williamsuppo/php:1.0
     networks:
       - app
     volumes:
       - '.:/var/www'
 
   nginx:
-    build:
-      context: ./docker/nginx
+    image: williamsuppo/nginx:1.0
     networks:
       - app
     volumes:
